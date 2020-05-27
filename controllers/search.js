@@ -96,7 +96,8 @@ exports.findByQuery = async function (req, res) {
                     { Place: { $regex: regex, $options: "i" } }, 
                     { Sex: { $regex: regex, $options: "i" } }, 
                     { Branch: { $regex: regex, $options: "i" } },
-                    { House: { $regex: regex, $options: "i" } } 
+                    { House: { $regex: regex, $options: "i" } },
+                    { "Admission No": { $regex: regex, $options: "i" } }
                 ] 
             });
             results = [...btech];
@@ -107,7 +108,8 @@ exports.findByQuery = async function (req, res) {
                     { Place: { $regex: regex, $options: "i" } }, 
                     { Sex: { $regex: regex, $options: "i" } }, 
                     { Branch: { $regex: regex, $options: "i" } },
-                    { House: { $regex: regex, $options: "i" } } 
+                    { House: { $regex: regex, $options: "i" } },
+                    { "Admission No": { $regex: regex, $options: "i" } }
                 ] 
             });
             results = [...mtech];
@@ -118,7 +120,8 @@ exports.findByQuery = async function (req, res) {
                     { Place: { $regex: regex, $options: "i" } }, 
                     { Sex: { $regex: regex, $options: "i" } }, 
                     { Branch: { $regex: regex, $options: "i" } },
-                    { House: { $regex: regex, $options: "i" } } 
+                    { House: { $regex: regex, $options: "i" } },
+                    { "Admission No": { $regex: regex, $options: "i" } } 
                 ] 
             });
             const mtech = await MTech.find({ 
@@ -127,7 +130,8 @@ exports.findByQuery = async function (req, res) {
                     { Place: { $regex: regex, $options: "i" } }, 
                     { Sex: { $regex: regex, $options: "i" } }, 
                     { Branch: { $regex: regex, $options: "i" } },
-                    { House: { $regex: regex, $options: "i" } } 
+                    { House: { $regex: regex, $options: "i" } },
+                    { "Admission No": { $regex: regex, $options: "i" } }
                 ] 
             });
             results = [...btech, ...mtech];
