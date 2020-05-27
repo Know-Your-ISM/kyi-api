@@ -92,46 +92,46 @@ exports.findByQuery = async function (req, res) {
         if (req.query.course === "btech") {
             const btech = await BTech.find({ 
             $or: [ 
-                    { Name: { $regex: regex, $options: "i" } }, 
+                    { Name: { $regex: regex, $options: "i" } },
+                    { "Admission No": { $regex: regex, $options: "i" } },
+                    { Branch: { $regex: regex, $options: "i" } },
                     { Place: { $regex: regex, $options: "i" } }, 
                     { Sex: { $regex: regex, $options: "i" } }, 
-                    { Branch: { $regex: regex, $options: "i" } },
-                    { House: { $regex: regex, $options: "i" } },
-                    { "Admission No": { $regex: regex, $options: "i" } }
+                    { House: { $regex: regex, $options: "i" } }
                 ] 
             });
             results = [...btech];
         } else if (req.query.course === "mtech") {
             const mtech = await MTech.find({ 
             $or: [ 
-                    { Name: { $regex: regex, $options: "i" } }, 
+                    { Name: { $regex: regex, $options: "i" } },
+                    { "Admission No": { $regex: regex, $options: "i" } },
+                    { Branch: { $regex: regex, $options: "i" } },
                     { Place: { $regex: regex, $options: "i" } }, 
                     { Sex: { $regex: regex, $options: "i" } }, 
-                    { Branch: { $regex: regex, $options: "i" } },
-                    { House: { $regex: regex, $options: "i" } },
-                    { "Admission No": { $regex: regex, $options: "i" } }
+                    { House: { $regex: regex, $options: "i" } }
                 ] 
             });
             results = [...mtech];
         } else {
             const btech = await BTech.find({ 
             $or: [ 
-                    { Name: { $regex: regex, $options: "i" } }, 
+                    { Name: { $regex: regex, $options: "i" } },
+                    { "Admission No": { $regex: regex, $options: "i" } },
+                    { Branch: { $regex: regex, $options: "i" } },
                     { Place: { $regex: regex, $options: "i" } }, 
                     { Sex: { $regex: regex, $options: "i" } }, 
-                    { Branch: { $regex: regex, $options: "i" } },
-                    { House: { $regex: regex, $options: "i" } },
-                    { "Admission No": { $regex: regex, $options: "i" } } 
+                    { House: { $regex: regex, $options: "i" } }
                 ] 
             });
             const mtech = await MTech.find({ 
             $or: [ 
-                    { Name: { $regex: regex, $options: "i" } }, 
+                    { Name: { $regex: regex, $options: "i" } },
+                    { "Admission No": { $regex: regex, $options: "i" } },
+                    { Branch: { $regex: regex, $options: "i" } },
                     { Place: { $regex: regex, $options: "i" } }, 
                     { Sex: { $regex: regex, $options: "i" } }, 
-                    { Branch: { $regex: regex, $options: "i" } },
-                    { House: { $regex: regex, $options: "i" } },
-                    { "Admission No": { $regex: regex, $options: "i" } }
+                    { House: { $regex: regex, $options: "i" } }
                 ] 
             });
             results = [...btech, ...mtech];
