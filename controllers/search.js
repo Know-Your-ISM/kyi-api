@@ -83,3 +83,59 @@ exports.querySearch = async (req, res) => {
 
     res.json({ "count": students.length, students });
 }
+
+exports.findByQuery = async function (req, res) {
+    let regex = new RegExp (req.params.query);
+    var results = [];
+
+    try {
+        if (req.query.course === "btech") {
+            const btech = await BTech.find({ 
+            $or: [ 
+                    { Name: { $regex: regex, $options: "i" } }, 
+                    { Place: { $regex: regex, $options: "i" } }, 
+                    { Sex: { $regex: regex, $options: "i" } }, 
+                    { Branch: { $regex: regex, $options: "i" } },
+                    { House: { $regex: regex, $options: "i" } } 
+                ] 
+            });
+            results = [...btech];
+        } else if (req.query.course === "mtech") {
+            const mtech = await MTech.find({ 
+            $or: [ 
+                    { Name: { $regex: regex, $options: "i" } }, 
+                    { Place: { $regex: regex, $options: "i" } }, 
+                    { Sex: { $regex: regex, $options: "i" } }, 
+                    { Branch: { $regex: regex, $options: "i" } },
+                    { House: { $regex: regex, $options: "i" } } 
+                ] 
+            });
+            results = [...mtech];
+        } else {
+            const btech = await BTech.find({ 
+            $or: [ 
+                    { Name: { $regex: regex, $options: "i" } }, 
+                    { Place: { $regex: regex, $options: "i" } }, 
+                    { Sex: { $regex: regex, $options: "i" } }, 
+                    { Branch: { $regex: regex, $options: "i" } },
+                    { House: { $regex: regex, $options: "i" } } 
+                ] 
+            });
+            const mtech = await MTech.find({ 
+            $or: [ 
+                    { Name: { $regex: regex, $options: "i" } }, 
+                    { Place: { $regex: regex, $options: "i" } }, 
+                    { Sex: { $regex: regex, $options: "i" } }, 
+                    { Branch: { $regex: regex, $options: "i" } },
+                    { House: { $regex: regex, $options: "i" } } 
+                ] 
+            });
+            results = [...btech, ...mtech];
+        }
+        res.json({ count: results.length, results });
+    }
+    catch (e) {
+        console.log(e);
+        res.status(500).json({ "message": e });
+    }
+}
