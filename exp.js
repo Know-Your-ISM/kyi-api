@@ -19,9 +19,12 @@ exp.use(function (req, res, next){
 exp.use(express.json());
 exp.use(express.urlencoded({ extended: true }));
 
-exp.use("/", home);
-exp.use("/search", search);
-exp.use("/students", students);
+exp.use("/", (req, res) => {
+	res.send("For the API use: <a href='/api'>https://kyi.herokuapp.com/api</a>");
+});
+exp.use("/api", home);
+exp.use("/api/search", search);
+exp.use("/api/students", students);
 
 exp.use(notFound);
 
