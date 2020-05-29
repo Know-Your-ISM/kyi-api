@@ -19,7 +19,7 @@ exp.use(function (req, res, next){
 exp.use(express.json());
 exp.use(express.urlencoded({ extended: true }));
 
-exp.use("/", (req, res) => {
+exp.get("/", (req, res) => {
 	res.send("For the API use: <a href='/api'>https://kyi.herokuapp.com/api</a>");
 });
 exp.use("/api", home);
