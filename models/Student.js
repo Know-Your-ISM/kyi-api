@@ -1,14 +1,12 @@
 const mongoose = require ("mongoose");
 
 var StudentSchema = new mongoose.Schema({
-	Name:
-	{
+	Name: {
 		type: String,
 		trim: true,
 		required: true
 	},
-	Email:
-	{
+	Email: {
 		type: String,
 		match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
 		lowercase: true,
@@ -31,16 +29,42 @@ var StudentSchema = new mongoose.Schema({
 		trim: true,
 		default: ""
 	},
-	Place: {
+	City: {
 		type: String,
 		trim: true,
 		default: ""
 	},
-	Branch: {
+	State: {
 		type: String,
 		trim: true,
 		default: ""
 	},
+	Course: {
+		type: String,
+		trim: true,
+		default: ""
+	},
+	Department: {
+		type: String,
+		trim: true,
+		default: ""
+	},
+	Clubs: {
+		type: Array,
+		default: []
+	},
+	Phone: {
+		type: String,
+		trim: true,
+		default: ""
+	},
+	Avatar: {
+		type: Buffer
+	},
+	Internship: {
+		type: Array,
+		default: []
+	}
 },
 {
 	timestamps: true
@@ -50,7 +74,11 @@ StudentSchema.methods.toJSON = function () {
 	const user = this;
 	const userObject = user.toObject({ virtuals: true });
 	delete userObject["__v"];
-	delete userObject["email"];
+	delete userObject["Email"];
+	delete userObject["Sl"];
+	delete userObject["Phone"];
+	delete userObject["Clubs"];
+	delete userObject["id"];
 	return userObject;
 }
 

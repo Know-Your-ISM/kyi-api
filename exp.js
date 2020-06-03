@@ -1,9 +1,11 @@
 const express = require ('express');
 
-const students = require("./routes/students");
+const students = require("./routes/student");
 const search = require ("./routes/search");
 const home = require ("./routes/home");
 const notFound = require ("./routes/404");
+const app = require ("./routes/app");
+const dev = require ("./routes/dev");
 
 const exp = express();
 
@@ -25,6 +27,8 @@ exp.get("/", (req, res) => {
 exp.use("/api", home);
 exp.use("/api/search", search);
 exp.use("/api/students", students);
+exp.use("/api/app", app);
+exp.use("/api/dev", dev);
 
 exp.use(notFound);
 
