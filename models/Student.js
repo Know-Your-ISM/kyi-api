@@ -70,6 +70,20 @@ var StudentSchema = new mongoose.Schema({
 	timestamps: true
 });
 
+// StudentSchema.pre('find', (next) => {
+// 	this._startTime = Date.now();
+// 	next();
+// });
+
+// StudentSchema.post('find', (doc, next) => {
+// 	this._queryTime = null;
+// 	if (this._startTime) {
+// 		this._queryTime = Date.now() - this._startTime;
+// 	}
+// 	console.log(`${this._queryTime/1000} second.`);
+// 	next();
+// });
+
 StudentSchema.methods.toJSON = function () {
 	const user = this;
 	const userObject = user.toObject({ virtuals: true });

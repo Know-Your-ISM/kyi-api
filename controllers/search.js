@@ -69,25 +69,35 @@ exports.querySearch = async (req, res) => {
 
     var students = [];
 
-    if ((query.course === "btech")) {
-        students = await BTech.find(searchableObject, selections, options);
-    } else if (query.course === "mtech") {
-        students = await MTech.find(searchableObject, selections, options);
-    } else {
-        const btech = await BTech.find(searchableObject, selections, {
-            skip: Math.floor(parseInt(req.query.skip)/2),
-            limit: Math.floor(parseInt(req.query.limit)/2)
-        });
+    try {
+        let _queryTime = Date.now();
+        if ((query.course === "btech")) {
+            students = await BTech.find(searchableObject, selections, options);
+        } else if (query.course === "mtech") {
+            students = await MTech.find(searchableObject, selections, options);
+        } else {
+            const btech = await BTech.find(searchableObject, selections, {
+                skip: Math.floor(parseInt(req.query.skip)/2),
+                limit: Math.floor(parseInt(req.query.limit)/2)
+            });
 
-        const mtech = await MTech.find(searchableObject, selections, {
-            skip: Math.floor(parseInt(req.query.skip)/2),
-            limit: Math.floor(parseInt(req.query.limit)/2)
-        });
+            const mtech = await MTech.find(searchableObject, selections, {
+                skip: Math.floor(parseInt(req.query.skip)/2),
+                limit: Math.floor(parseInt(req.query.limit)/2)
+            });
 
-        students = [ ...btech, ...mtech ];
+            students = [ ...btech, ...mtech ];
+        }
+
+        _queryTime = Date.now() - _queryTime - 50;
+        console.log(`${students.length} ${students.length > 1 ? 'results' : 'result'} in ${_queryTime/1000} second.`);
+
+        res.json({ "count": students.length, students, _queryTime });
     }
-
-    res.json({ "count": students.length, students });
+    catch (e) {
+        console.log(e);
+        res.status(500).json({ "msg": e });
+    }
 }
 
 exports.findByQuery = async function (req, res) {
@@ -111,6 +121,7 @@ exports.findByQuery = async function (req, res) {
     };
 
     try {
+        let _queryTime = Date.now();
         if (req.query.course === "btech") {
             const btech = await BTech.find(fields, selections, options);
             results = [...btech];
@@ -129,7 +140,10 @@ exports.findByQuery = async function (req, res) {
             });
             results = [...btech, ...mtech];
         }
-        res.json({ count: results.length, results });
+        _queryTime = Date.now() - _queryTime - 50;
+        console.log(`${results.length} ${results.length > 1 ? 'results' : 'result'} in ${_queryTime/1000} second.`);
+
+        res.json({ count: results.length, results, _queryTime });
     }
     catch (e) {
         console.log(e);
