@@ -89,7 +89,7 @@ exports.querySearch = async (req, res) => {
             students = [ ...btech, ...mtech ];
         }
 
-        _queryTime = Date.now() - _queryTime - 50;
+        _queryTime = Date.now() - _queryTime;
         console.log(`${students.length} ${students.length > 1 ? 'results' : 'result'} in ${_queryTime/1000} second.`);
 
         res.json({ "count": students.length, students, _queryTime });
@@ -140,7 +140,7 @@ exports.findByQuery = async function (req, res) {
             });
             results = [...btech, ...mtech];
         }
-        _queryTime = Date.now() - _queryTime - 50;
+        _queryTime = Date.now() - _queryTime;
         console.log(`${results.length} ${results.length > 1 ? 'results' : 'result'} in ${_queryTime/1000} second.`);
 
         res.json({ count: results.length, results, _queryTime });
