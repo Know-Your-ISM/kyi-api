@@ -11,6 +11,8 @@ const exp = express();
 
 require ("./db/mongoose");
 
+exp.use('/views', express.static('views'));
+
 exp.use(function (req, res, next){
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Methods", "*");
@@ -22,7 +24,7 @@ exp.use(express.json());
 exp.use(express.urlencoded({ extended: true }));
 
 exp.get("/", (req, res) => {
-	res.send("For the API use: <a href='/api'>https://kyi.herokuapp.com/api</a>");
+	res.sendFile(__dirname + "/views/kyi_2.html");
 });
 exp.use("/api", home);
 exp.use("/api/search", search);
