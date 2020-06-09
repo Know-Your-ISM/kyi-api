@@ -1,5 +1,7 @@
 /* Overlay */
 let $overlay = document.querySelector("#overlay");
+let $loaderWrap = document.querySelector("#loader-wrap");
+let $overlayText = document.querySelector("#overlay-text");
 
 /* Search Header */
 let $searchBar = document.querySelector("#search-bar");
@@ -16,4 +18,4 @@ let $clearFilters = document.querySelector("#clear_filters");
 
 /* Results */
 let $resultsUl = document.querySelector("#results-ul");
-// .results-li > .card > ( picture > source {srcset} ) + .card_text > h4 + h5 + p;
+/* .results-li > .card > ( picture > source {srcset} ) + .card_text > h4 + h5 + p; */

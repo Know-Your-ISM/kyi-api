@@ -1,4 +1,5 @@
 var url = new URL(`https://kyi.herokuapp.com/api/search`);
+// let url = { href: `/api/search` };
 const ANDROID_API_KEY = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZWQ3YTczMjg4NjRiNTRjMmEwZTJjNDIiLCJuYW1lIjoiQW5kcm9pZCBSb290IiwiaWF0IjoxNTkxMTkxMzQ2fQ.TsyelRUy49mBD-bFhFShoK-LJR3adlWvJA2mXgtTX4k`;
 
 const fetchResults = async (params) => {
@@ -6,6 +7,8 @@ const fetchResults = async (params) => {
     // let { name, house, branch, state, city, club } = params;
     let newURL = url.href;
     let queries = Object.keys(params);
+
+    console.log(`Query started at ${newURL}.`);
 
     for (let i = 0; i < queries.length; i ++) {
         if (i !== 0) {

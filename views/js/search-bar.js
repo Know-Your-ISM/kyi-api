@@ -1,19 +1,17 @@
-/* Overlay */
-let $overlay = document.querySelector("#overlay");
-let $loaderWrap = document.querySelector("#loader-wrap");
+window.onload = () => {
+    $searchBar.focus();
+}
 
-/* Search Header */
-let $searchBar = document.querySelector("#search-bar");
-let $searchSubmit = document.querySelector("#search-submit-btn");
-let $searchClear = document.querySelector("#search-clear-btn");
-let $alerts = document.querySelector("#alerts");
-
-/* Filters */
-let $branch = document.querySelector("#branch");
-let $state = document.querySelector("#state");
-let $house = document.querySelector("#house");
-let $club = document.querySelector("#club");
-let $clearFilters = document.querySelector("#clear_filters");
+window.addEventListener("offline", (ev) => {
+    ev.preventDefault();
+    $overlay.style.display = 'block';
+    $overlayText.innerHTML = 'You are offline';
+    window.addEventListener("online", (e) => {
+        $overlay.style.display = 'none';
+        $overlayText.innerHTML = 'Back online.';
+        location.reload();
+    });
+});
 
 const admnoRegex = /\d\d\D\D/gi;
 

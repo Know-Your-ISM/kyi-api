@@ -1,7 +1,3 @@
-/* Results */
-let $resultsUl = document.querySelector("#results-ul");
-/* .results-li > .card > ( picture > source {srcset} ) + .card_text > h4 + h5 + p; */
-
 let blank_image = "/views/profile_blank.png";
 
 /**
