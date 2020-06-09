@@ -8,8 +8,6 @@ const fetchResults = async (params) => {
     let newURL = url.href;
     let queries = Object.keys(params);
 
-    console.log(`Query started at ${newURL}.`);
-
     for (let i = 0; i < queries.length; i ++) {
         if (i !== 0) {
             newURL += `&${queries[i]}=${params[queries[i]]}`;

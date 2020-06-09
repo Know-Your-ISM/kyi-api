@@ -30,8 +30,8 @@ body {
 	margin: 95px 0 0 0;
 	padding: 0;
 	font-family: sans-serif;
-	/*background: url('background-grassy.jpg');*/
-	background: lightsalmon;
+	background: url('/views/background-grassy.jpg');
+	/*background: lightsalmon;*/
 	background-attachment: fixed;
 	background-size: cover;
 }
@@ -171,6 +171,7 @@ select {
 	border-radius: 4px;
 	border: 0.5px #759991 solid;
 	color: #eee;
+	width: 95%;
 }
 
 .filter_buttons {
@@ -203,7 +204,7 @@ input[type="button"]:hover {
 	position: absolute;
 	left: 18%;
 	z-index: 0;
-	width: 81.5vw;
+	width: 81vw;
 	padding: 10px;
 }
 
@@ -260,7 +261,7 @@ picture img {
 }
 
 #page_scrolling_buttons {
-	display: flex;
+	display: none;
 	justify-content: center;
 	margin-bottom: 30px;
 }

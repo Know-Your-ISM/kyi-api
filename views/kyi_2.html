@@ -2,10 +2,17 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
+	<!-- Page title -->
 	<title>Know Your ISM | Web</title>
+
+	<!-- Meta tags -->
+	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+	<!-- Stylesheets -->
 	<link rel="stylesheet" href="/views/css/kyi_2_styles.css">
+
+	<!-- Favicon -->
 	<link rel="shortcut icon" href="/views/kyi_logo_2.png" type="image/x-icon">
 </head>
 
@@ -44,10 +51,20 @@
 		<div class="sidebar">
 			<form>
 				<span class="filter_label">
-					<p>Filter by: </p>
+					<p>Filter by:</p>
 				</span>
 				<div class="sidebar_content">
 					<div class="all_selects">
+						<label for="course">Course:</label>
+						<select name="course" id="course">
+							<option value="" class="none-selected"></option>
+							<!-- <option value="btech">Bachelor of Technology</option>
+							<option value="btech">Integrated Master of Technology</option>
+							<option value="btech">Bachelor of Technology with Master of Technology</option>
+							<option value="mtech">Others</option> -->
+							<option value="btech">Undergraduate / Undergraduate + Post-Graduate</option>
+							<option value="mtech">Post-Graduate / PhD</option>
+						</select>
 						<label for="branch">Branch:</label>
 						<select name="branch" id="branch" disabled="true">
 							<option value="" class="none-selected"></option>
@@ -149,7 +166,7 @@
 							<option value="21">Mailer Daemon</option>
 						</select>
 					</div>
-					<!--all_selects-->
+					<!-- all_selects -->
 
 					<div class="filter_buttons">
 						<a href="#">
@@ -162,7 +179,7 @@
 		<!-- End sidebar. -->
 
 		<!-- Results. -->
-		<div class="right">
+		<div class="right" id="right">
 			<ul class="results-ul" id="results-ul">
 				<li class="results-li">
 					<div class="card">
@@ -184,16 +201,10 @@
 
 
 			<div id="page_scrolling_buttons">
-				<a href="#"><button id="first_page">
-						&laquo; First Page
-					</button></a>
-				<a href="#"><button id="previous_page">
-						&#8249; Previous
-					</button></a>
+				<button id="first_page">&laquo; First Page</button>
+				<button id="previous_page">&#8249; Previous</button>
 
-				<a href="#"><button id="next_page">
-						Next &#8250;
-					</button></a>
+				<button id="next_page">Next &#8250;</button>
 
 			</div>
 
@@ -205,10 +216,16 @@
 	<!-- Scripts. -->
 	<!-- All DOM elements. -->
 	<script src="/views/js/elements.js"></script>
+	<!-- Global variables -->
+	<script src="/views/js/globals.js"></script>
+	<!-- Global listeners -->
+	<script src="/views/js/global-listeners.js"></script>
 	<!-- API calls related JS. -->
 	<script src="/views/js/search.js"></script>
-	<!-- Search header related JS. -->
-	<script src="/views/js/search-bar.js"></script>
+	<!-- Utility functions -->
+	<script src="/views/js/utils.js"></script>
+	<!-- LIsteners on DOM elements -->
+	<script src="/views/js/element-listeners.js"></script>
 	<!-- Results DOM display related JS. -->
 	<script src="/views/js/results-ul.js"></script>
 	<!-- End scripts. -->
