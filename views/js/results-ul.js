@@ -38,15 +38,15 @@ const insertResult = (result, i) => {
     card_text.setAttribute("class", "card_text");
 
     h4.textContent = result.Name.toUpperCase();
-    p.textContent = result.Sex === "M" ? "Male" : "Female";
+    p.textContent = JSON.stringify(result);
     h5.textContent = `${result.Course !== "" ? result.Course.toUpperCase() : "BTECH"} | ${result.House}`;
 
     card_text.appendChild(h4);
     card_text.appendChild(h5);
     card_text.appendChild(p);
 
-    source.media = "";
-    source.srcset = "";
+    source.media = `https://kyi.herokuapp.com/api/students/avatar/${result._id}`;
+    source.srcset = `https://kyi.herokuapp.com/api/students/avatar/${result._id}`;
 
     img.src = blank_image;
     img.alt = "No photo available.";
