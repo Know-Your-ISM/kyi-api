@@ -107,19 +107,25 @@ async function sharpValidation(original, mimetype) {
 
 exports.create = async (req, res) => {
     let student;
+    let regex = new RegExp(req.body["Admission No"], "i");
     try {
-        if (req.body.Course = "BTech") {
+        if (req.body["kyi-db-identifier"] = "BTech") {
             student = new BTech(req.body);
+            await Btech.findOneAndDelete({"Admission No": { $regex: regex }});
         }
         else {
             student = new MTech(req.body);
+            await MTech.findOneAndDelete({"Admission No": { $regex: regex }});
         }
 
         if (req.file) {
             student.Photo = await sharpValidation(req.file.buffer, req.file.mimetype);
             student.format = req.file.mimetype;
         }
+
+
         let saved = await student.save();
+
         res.send(JSON.stringify({ student: saved }) + `\nStudent saved.`);
     }
     catch (e) {
