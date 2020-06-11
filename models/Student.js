@@ -21,7 +21,6 @@ var StudentSchema = new mongoose.Schema({
 	Sex: {
 		type: String,
 		trim: true,
-		required: true,
 		default: "Unspecified"
 	},
 	House: {
@@ -58,12 +57,21 @@ var StudentSchema = new mongoose.Schema({
 		trim: true,
 		default: ""
 	},
-	Avatar: {
-		type: Buffer
-	},
 	Internship: {
 		type: Array,
 		default: []
+	},
+	Photo: {
+		type: Buffer
+	},
+	Facebook: {
+		type: String,
+		trim: true,
+		default: ""
+	},
+	format: {
+		type: String,
+		trim: true
 	}
 },
 {
@@ -93,6 +101,8 @@ StudentSchema.methods.toJSON = function () {
 	delete userObject["Phone"];
 	delete userObject["Clubs"];
 	delete userObject["id"];
+	delete userObject["Photo"];
+	delete userObject["format"];
 	return userObject;
 }
 
