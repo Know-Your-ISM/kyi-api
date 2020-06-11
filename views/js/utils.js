@@ -54,7 +54,7 @@ const submitQuery = async (page) => {
 
         loadResults(students.students.slice(0, 15));
 
-        showAlert(`${students.count} ${students.count > 1 ? `results` : `result`} in ${students._queryTime/1000}s.`);
+        showAlert(`${students.count} ${students.count > 1 ? `results` : `result`} in ${students._queryTime}ms.`);
 
         closeLoader();
     } else {
