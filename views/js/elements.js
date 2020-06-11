@@ -8,6 +8,11 @@ let $searchBar = document.querySelector("#search-bar");
 let $searchSubmit = document.querySelector("#search-submit-btn");
 let $searchClear = document.querySelector("#search-clear-btn");
 let $alerts = document.querySelector("#alerts");
+let $logo = document.querySelector("#logo");
+
+/* Sidebar */
+let $sidebar = document.querySelector(".sidebar");
+let $sidebarContent = document.querySelector(".sidebar_content");
 
 /* Filters */
 let $branch = document.querySelector("#branch");

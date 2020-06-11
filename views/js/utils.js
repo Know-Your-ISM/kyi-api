@@ -63,6 +63,8 @@ const submitQuery = async (page) => {
             showAlert("");
         }, 3000);
     }
+
+    ifMobileCloseSidebar();
 }
 
 const startPaginationListeners = () => {
@@ -101,4 +103,12 @@ const stopPaginationListeners = () => {
 
 const scrollToTop = () => {
     document.documentElement.scrollTop = 0;
+}
+
+const ifMobileCloseSidebar = () => {
+    if (document.documentElement.clientWidth < 800) {
+        $sidebar.style.display = "none";
+        $sidebarContent.style.display = "none";
+        $right.style.display = "block";
+    }
 }
