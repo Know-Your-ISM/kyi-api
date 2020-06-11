@@ -21,15 +21,15 @@ const clearResults = () => {
 }
 
 const insertResult = (result, i) => {
+    let { State, City, Course, Department, Name, Sex, House } = result;
     let li = document.createElement('li');
     let card = document.createElement('div');
     let picture = document.createElement('picture');
-    let source = document.createElement('source');
     let img = document.createElement('img');
     let card_text = document.createElement('div');
     let h4 = document.createElement('h4');
-    let h5 = document.createElement('h5');
-    let p = document.createElement('p');
+    let place = document.createElement('h5');
+    let branch = document.createElement('h5');
 
     li.setAttribute("class", "results-li");
     li.setAttribute("id", i);
@@ -37,21 +37,22 @@ const insertResult = (result, i) => {
     card.setAttribute("class", "card");
     card_text.setAttribute("class", "card_text");
 
-    h4.textContent = result.Name.toUpperCase();
-    p.textContent = JSON.stringify(result);
-    h5.textContent = `${result.Course !== "" ? result.Course.toUpperCase() : "BTECH"} | ${result.House}`;
+    h4.innerHTML = `${result.Name.toUpperCase()} <small><i>${Sex === "M" ? "MALE" : Sex === "F" ? "FEMALE" : "Unspecified"} | ${House.toUpperCase()}</i></small>`;
+    // h6.innerHTML = `${Sex === "M" ? "MALE" : Sex === "F" ? "FEMALE" : "Unspecified"} | ${House.toUpperCase()}`;
+    place.textContent = `${City ? City : "CITY"}, ${State ? State : "STATE"}`;
+    branch.textContent = `${Course ? Course.toUpperCase() : "BTECH"} | ${Department ? Department : "DEPARTMENT"}`;
 
     card_text.appendChild(h4);
-    card_text.appendChild(h5);
-    card_text.appendChild(p);
+    card_text.appendChild(place);
+    card_text.appendChild(branch);
 
-    source.media = `https://kyi.herokuapp.com/api/students/avatar/${result._id}`;
-    source.srcset = `https://kyi.herokuapp.com/api/students/avatar/${result._id}`;
-
-    img.src = blank_image;
+    img.src = `https://kyi.herokuapp.com/api/students/avatar/${result._id}`;
+    img.onerror = () => {
+        img.src = blank_image;
+    }
     img.alt = "No photo available.";
 
-    picture.appendChild(source);
+    picture.setAttribute("class", "picture");
     picture.appendChild(img);
 
     card.appendChild(picture);

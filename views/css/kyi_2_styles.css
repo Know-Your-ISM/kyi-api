@@ -115,11 +115,9 @@ body {
 
 .header #logo {
 	height: 70px;
-	flex: 0.1;
-	margin-right: auto;
-	padding-left: 5.5vw;
+	padding-left: 10px;
 	margin-top: 10px;
-	padding-right: 5.5vw;
+	padding-right: 10px;
 }
 
 .sidebar .filter_label {
@@ -217,14 +215,14 @@ input[type="button"]:hover {
 }
 
 .results-li {
-	width: 45%;
+	width: 46%;
 	margin: 20px;
 }
 
 .card {
 	display: flex;
 	padding: 9px;
-	height: 160px;
+	height: 170px;
 	width: 100%;
 	background-color: white;
 	box-shadow: 2px 3px 7px #959595;
@@ -241,9 +239,9 @@ input[type="button"]:hover {
 picture img {
 	margin-top: 5px;
 	margin-right: 20px;
-	height: auto;
+	height: 135px;
 	width: 135px;
-	border-radius: 30px;
+	border-radius: 50%;
 	background: #127c6e;
 }
 
@@ -297,19 +295,43 @@ picture img {
 }
 
 @media (max-width: 800px) {
-	main {
-		left: 17%;
-		margin-left: 40px;
-		margin-right: 5px;
-		padding-left: 10px;
-	}
 
+	@media (max-width: 800px) {
 	.sidebar .sidebar_content {
-		width: 21vw;
+		width: 100vw;
+		display: none;
 	}
 
-	.card {
-		width: 65vw;
+	#logo {
+		padding: 0;
+		width: auto;
+		height: 30px; 
+	}
+
+	#search-clear-btn {
+		display: none;
+	}
+
+	#search-bar {
+		width: 71vw;
+		margin: 0 10px 10px 0;
+	}
+
+	#search-submit-btn {
+		width: 40px;
+		height: 40px;
+		display: none;
+	}
+
+	/*#search_bar_and_images {}*/
+
+	.right {
+		left: 0;
+		width: 100vw;
+	}
+
+	.results-ul, .results-li {
+		width: 100%;
 		height: auto;
 	}
 
@@ -321,6 +343,8 @@ picture img {
 		height: 60px;
 		width: 100px;
 	}
+}
+
 }
 
 .loader-wrap {
