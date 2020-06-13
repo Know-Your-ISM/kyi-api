@@ -21,6 +21,7 @@ const clearResults = () => {
 }
 
 const insertResult = (result, i) => {
+    console.log(result);
     let { State, City, Course, Department, Name, Sex, House } = result;
     let li = document.createElement('li');
     let card = document.createElement('div');

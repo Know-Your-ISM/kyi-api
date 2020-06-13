@@ -24,7 +24,7 @@ exp.use(express.json());
 exp.use(express.urlencoded({ extended: true }));
 
 exp.get("/", (req, res) => {
-	res.sendFile(__dirname + "/views/kyi_2.html");
+	res.sendFile(__dirname + "/views/index.html");
 });
 exp.use("/api", home);
 exp.use("/api/search", search);

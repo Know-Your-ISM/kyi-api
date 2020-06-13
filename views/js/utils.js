@@ -11,7 +11,9 @@ const closeLoader = () => {
 }
 
 const showAlert = (text) => {
+    state.lastAlert = $alerts.innerHTML;
     $alerts.innerHTML = text;
+    state.currentAlert = $alerts.innerHTML;
 }
 
 const startPaginators = () => {
@@ -25,23 +27,21 @@ const stopPaginators = () => {
 }
 
 const submitQuery = async (page) => {
-    if ($searchBar.value !== "") {
-        launchLoader();
-        let params = {};
-        let input = $searchBar.value;
-        let pageNumber = page || 1;
+    let params = {};
+    let input = $searchBar.value;
+    let pageNumber = page || 1;
 
-        admnoRegex.test(input) ?
-        params.admno = $searchBar.value : 
-        params.name = $searchBar.value;
+    admnoRegex.test(input) ?
+        params.admno = input : input !== "" ?
+            params.name = input : null;
 
+    let filters = [ $branch, $house, $state, $club, $course ];
+    filters.forEach(filter => {
+        if (filter["value"] !== "") params[filter.name] = filter.value;
+    });
+
+    if (Object.keys(params).length !== 0) {
         params.admno ? showAlert("Searching for admission number.") : showAlert("Searching for name.");
-
-        if ($branch.value !== "") params.branch = $branch.value;
-        if ($house.value !== "") params.house = $house.value;
-        if ($state.value !== "") params.state = $state.value;
-        if ($club.value !== "") params.club = $club.value;
-        if ($course.value !== "") params.course = $course.value;
         params.limit = pageNumber * 15 + 1;
         params.skip = (pageNumber - 1) * 15;
 
@@ -50,54 +50,51 @@ const submitQuery = async (page) => {
         if (students.count > 15) startPaginators();
         else stopPaginators();
 
-        currentPage = pageNumber;
-
-        loadResults(students.students.slice(0, 15));
+        state.page = pageNumber;
 
         showAlert(`${students.count} ${students.count > 1 ? `results` : `result`} in ${students._queryTime}ms.`);
 
-        closeLoader();
+        return students.students.slice(0, 15);
     } else {
-        showAlert("You can't leave the search bar empty!");
+        showAlert("Provide at least one search parameter!");
         setTimeout(() => {
             showAlert("");
-        }, 3000);
+        }, 2000);
+        return null;
     }
-
-    ifMobileCloseSidebar();
 }
 
 const startPaginationListeners = () => {
-    $nextPage.addEventListener("click", (ev) => {
+    $nextPage.addEventListener("click", async (ev) => {
         ev.preventDefault();
-        submitQuery(currentPage + 1);
+        await submitQuery(state.page + 1);
     });
 
-    $previousPage.addEventListener("click", (ev) => {
+    $previousPage.addEventListener("click", async (ev) => {
         ev.preventDefault();
-        if (currentPage !== 1) submitQuery(currentPage - 1);
+        if (state.page !== 1) await submitQuery(state.page - 1);
     });
 
-    $firstPage.addEventListener("click", (ev) => {
+    $firstPage.addEventListener("click", async (ev) => {
         ev.preventDefault();
-        submitQuery(1);
+        await submitQuery(1);
     });
 }
 
 const stopPaginationListeners = () => {
-    $nextPage.removeEventListener("click", (ev) => {
+    $nextPage.removeEventListener("click", async (ev) => {
         ev.preventDefault();
-        submitQuery(currentPage + 1);
+        await submitQuery(state.page + 1);
     });
 
-    $previousPage.removeEventListener("click", (ev) => {
+    $previousPage.removeEventListener("click", async (ev) => {
         ev.preventDefault();
-        if (currentPage !== 1) submitQuery(currentPage - 1);
+        if (state.page !== 1) await submitQuery(state.page - 1);
     });
 
-    $firstPage.removeEventListener("click", (ev) => {
+    $firstPage.removeEventListener("click", async (ev) => {
         ev.preventDefault();
-        submitQuery(1);
+        await submitQuery(1);
     });
 }
 
@@ -106,9 +103,35 @@ const scrollToTop = () => {
 }
 
 const ifMobileCloseSidebar = () => {
-    if (document.documentElement.clientWidth < 800) {
+    if (state.screenWidth < 800) {
         $sidebar.style.display = "none";
         $sidebarContent.style.display = "none";
         $right.style.display = "block";
+        state.filters = "closed";
+    }
+}
+
+const runSubmit = async (ev) => {
+    ev.preventDefault();
+    toggleForm("disable");
+    launchLoader();
+    let results = await submitQuery(1);
+    loadResults(results);
+    toggleForm("enable");
+    ifMobileCloseSidebar();
+    closeLoader();
+}
+
+const toggleForm = (to) => {
+    if (to === "disable") {
+        $searchBar.readOnly = true;
+        $searchSubmit.readOnly = true;
+        $searchClear.readOnly = true;
+        $logo.readOnly = true;
+    } else if (to === "enable") {
+        $searchBar.readOnly = false;
+        $searchSubmit.readOnly = false;
+        $searchClear.readOnly = false;
+        $logo.readOnly = false;
     }
 }

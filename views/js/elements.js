@@ -4,6 +4,7 @@ let $loaderWrap = document.querySelector("#loader-wrap");
 let $overlayText = document.querySelector("#overlay-text");
 
 /* Search Header */
+let $searchForm = document.querySelector(".search-form");
 let $searchBar = document.querySelector("#search-bar");
 let $searchSubmit = document.querySelector("#search-submit-btn");
 let $searchClear = document.querySelector("#search-clear-btn");

@@ -13,7 +13,7 @@
 	bottom: 0;
 	background-color: rgba(255, 255, 255, 0.5);
 	z-index: 15; /* Specify a stack order in case you're using a different order for other elements */
-	cursor: pointer; /* Add a pointer on hover */
+	cursor: loader;
 }
 
 #overlay-text{
@@ -30,8 +30,8 @@ body {
 	margin: 95px 0 0 0;
 	padding: 0;
 	font-family: sans-serif;
-	background: url('/views/iitism-heritage.jpeg');
-	/*background: lightsalmon;*/
+	/*background: url('/views/iitism-heritage.jpeg');*/
+	background: lightgrey;
 	background-attachment: fixed;
 	background-size: cover;
 }
@@ -42,7 +42,7 @@ body {
 
 .header {
 	/*background: url('banner2.jpg');*/
-	background: grey;
+	background: white;
 	background-position: left top;
 	width: 100vw;
 	display: flex;
@@ -144,14 +144,15 @@ body {
 	display: block;
 	left: 0;
 	top: 90px;
-	background: url('banner2.jpg');
-	background: grey;
-	color: #fff;
+	/*background: url('banner2.jpg');*/
+	background: #4885ed;
+	color: white;
 	height: 87vh;
 	width: 18vw;
 	position: fixed;
 	z-index: 1;
 	box-shadow: 0 5px 5px #000;
+	text-align: center;
 	/*overflow-y: auto;*/
 }
 
@@ -164,15 +165,16 @@ body {
 }
 
 select {
-	background-color: #393939;
+	background-color: white;
 	height: 30px;
 	/*background-image: linear-gradient(to bottom,#000 0%,#9e9e9e 100%);*/
 	margin-top: 20px;
 	margin-bottom: 20px;
 	margin-right: 10px;
 	border-radius: 4px;
-	border: 0.5px #759991 solid;
-	color: #eee;
+	/*border: 0.5px #759991 solid;*/
+	border: none;
+	color: black;
 	width: 95%;
 }
 
@@ -183,18 +185,19 @@ select {
 input[type="button"] {
 	height: 40px;
 	border-radius: 15px;
-	border: 2px #000 solid;
+	border: none;
 	width: 55%;
 	cursor: pointer;
-	background-color: #edbb99;
+	background-color: #3caa54;
 	margin: 10px 10px;
 	font-size: 14px;
 	font-family: sans-serif;
+	color: white
 }
 
 input[type="button"]:hover {
-	background: #e59866;
-	color: #f7f9f9;
+	background: lightgreen;
+	color: black;
 }
 
 
@@ -228,9 +231,8 @@ input[type="button"]:hover {
 	padding: 9px;
 	height: 170px;
 	width: 100%;
-	background-color: white;
-	box-shadow: 2px 3px 7px #959595;
-	opacity: 0.8;
+	background-color: rgba(255, 255, 255, 0);
+	/*box-shadow: 2px 3px 7px #959595;*/
 	transition: 0.5s;
 	border-radius: 10px;
 }
@@ -238,6 +240,7 @@ input[type="button"]:hover {
 .card:hover {
 	opacity: 1;
 	box-shadow: 2px 3px 7px #757575;
+	background: white;
 }
 
 picture img {
@@ -298,77 +301,29 @@ picture img {
 	text-decoration: none;
 }
 
-@media (max-width: 800px) {
-
-	@media (max-width: 800px) {
-	.sidebar .sidebar_content {
-		width: 100vw;
-		display: none;
-	}
-
-	.header {
-		height: 80px;
-	}
-
-	#logo {
-		padding: unset;
-		padding: 0;
-		width: unset;
-		width: 80px;
-	}
-
-	#search-clear-btn {
-		display: none;
-	}
-
-	#search-bar {
-		width: 76vw;
-		margin: 0 10px 10px 0;
-	}
-
-	#search-submit-btn {
-		width: 40px;
-		height: 40px;
-		display: none;
-	}
-
-	.card {
-		border-radius: 0;
-		height: 190px;
-	}
-
-	/*#search_bar_and_images {}*/
-
-	.right {
-		left: 0;
-		width: 100vw;
-		padding: 0;
-	}
-
-	.results-ul, .results-li {
-		width: 100%;
-		height: auto;
-		padding: 0;
-	}
-
-	.results-ul {
-		margin: 0;
-	}
-
-	.results-li {
-		margin: 10px 0 5px 0;
-	}
-
-	.search_time {
-		display: none;
-	}
-
-	input[type="button"] {
-		height: 60px;
-		width: 100px;
-	}
+#instruction-card {
+	display: flex;
+	padding: 9px;
+	height: 130px;
+	width: 78vw;
+	background-color: rgba(255, 0, 0, 0);
+	/*background-color: yellow;*/
+	/*box-shadow: 2px 3px 7px #959595;*/
+	transition: 0.5s;
+	border-radius: 10px;
+	text-align: center;
+	color: grey;
+	font-style: italic;
 }
 
+/*#instruction-card:hover {*/
+	/*box-shadow: 2px 3px 7px #757575;*/
+/*}*/
+
+#inst-card_text {
+	text-align: center;
+	width: 100%;
+	padding-bottom: 10px;
 }
 
 .loader-wrap {
@@ -410,5 +365,83 @@ picture img {
 
 	100% {
 		transform: rotate(360deg);
+	}
+}
+
+
+@media (max-width: 800px) {
+
+	@media (max-width: 800px) {
+	.sidebar .sidebar_content {
+		width: 100vw;
+		display: none;
+	}
+
+	.header {
+		height: 80px;
+	}
+
+	#logo {
+		padding: unset;
+		padding: 0;
+		width: unset;
+		width: 80px;
+	}
+
+	#search-clear-btn {
+		display: none;
+	}
+
+	#search-bar {
+		width: 76vw;
+		margin: 0 10px 10px 0;
+	}
+
+	#search-submit-btn {
+		width: 40px;
+		height: 40px;
+		display: none;
+	}
+
+	.card {
+		border-radius: 0;
+		height: 180px;
+	}
+
+	/*#search_bar_and_images {}*/
+
+	.right {
+		left: 0;
+		width: 100vw;
+		padding: 0;
+	}
+
+	.results-ul, .results-li {
+		width: 100%;
+		height: auto;
+		padding: 0;
+	}
+
+	.results-ul {
+		margin: 0;
+	}
+
+	.results-li {
+		margin: 3px 0 5px 0;
+	}
+
+	.search_time {
+		display: none;
+	}
+
+	input[type="button"] {
+		height: 60px;
+		width: 100px;
+	}
+
+	#instruction-card {
+		width: 100vw;
+		border-radius: 0;
+		height: 200px;
 	}
 }

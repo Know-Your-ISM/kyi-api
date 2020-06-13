@@ -32,10 +32,10 @@
 		<!-- Search header. -->
 		<div class="header">
 			<img id="logo" src="/views/kyi_logo_2.png" alt="logo">
-			<div id="search_bar_and_images">
+			<form id="search_bar_and_images" class="search-form">
 				<input class="search1" id="search-bar" type="text" placeholder="Enter Name/Admission number">
 				
-				<button class="search-btn" id="search-submit-btn">
+				<button class="search-btn" id="search-submit-btn" type="submit">
 					<img class="search_images" src="/views/magnifying_glass.png" alt="submit">
 				</button>
 				<button class="search-btn" id="search-clear-btn">
@@ -43,7 +43,7 @@
 				</button>
 
 				<div class="alerts"  id="alerts"></div>
-			</div>
+			</form>
 		</div>
 		<!-- End search header. -->
 
@@ -182,15 +182,10 @@
 		<div class="right" id="right">
 			<ul class="results-ul" id="results-ul">
 				<li class="results-li">
-					<div class="card">
-						<picture>
-							<source media="" srcset="">
-							<img src="/views/profile_blank.png" alt="No profile photo">
-						</picture>
-						<div class="card_text">
-							<h4>lorem ipsum</h4>
-							<h5>lorem ipsum dolor</h5>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+					<div id="instruction-card">
+						<div id="inst-card_text">
+							<h4>This is a prototype and is best viewed on a computer.</h4>
+							<p>You can filter results through the left pane. Currently, only the house and course filters can be accessed. <br> On a mobile, tap the logo to open the left pane.</p>
 						</div>
 					</div>
 				</li>
