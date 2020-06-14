@@ -135,3 +135,18 @@ const toggleForm = (to) => {
         $logo.readOnly = false;
     }
 }
+
+const toggleColorScheme = () => {
+    if (state.scheme === 'light') {
+        showAlert("Switching to dark...");
+        $moonIcon.classList.remove("fa-moon-o");
+        $moonIcon.classList.add("fa-sun-o");
+        state.scheme = 'dark';
+        showAlert("");
+    } else if (state.scheme === 'dark') {
+        showAlert("Switching to light...");
+        $moonIcon.classList.remove("fa-sun-o");
+        $moonIcon.classList.add("fa-moon-o");
+        state.scheme = 'light';
+    }
+}

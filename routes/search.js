@@ -5,8 +5,8 @@ const auth = require ('../middleware/auth/app');
 
 const router = express.Router();
 
-router.get("", auth.auth, search.querySearch);
+router.get("", search.querySearch);
 
-router.get("/:query", auth.auth, search.findByQuery);
+router.get("/:query", search.findByQuery);
 
 module.exports = router;

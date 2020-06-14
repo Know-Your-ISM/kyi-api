@@ -25,6 +25,12 @@ $logo.addEventListener("click", (e) => {
 //     });
 // });
 
+$searchDark.addEventListener("click", (e) => {
+    e.preventDefault();
+    console.log("clicked.");
+    toggleColorScheme();
+});
+
 $searchForm.addEventListener("submit", runSubmit);
 
 $clearFilters.addEventListener('click', (e) => {

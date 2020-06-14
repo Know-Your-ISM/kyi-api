@@ -9,5 +9,6 @@ let state = {
     filters: this.screenWidth < 767 ? 'closed' : 'open',
     lastAlert: '',
     currentAlert: '',
-    online: true
+    online: true,
+    scheme: 'light'
 }

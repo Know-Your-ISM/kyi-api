@@ -88,13 +88,12 @@ body {
 }
 
 .header .search_images {
-	height: 40px;
 	padding: 3px;
 	border-radius: 20px;
 	box-shadow: 0 0 2px #fff;
 	height: 45px;
 	margin: 0 5px;
-	font-size: 40px;
+	font-size: 30px;
 }
 
 .search-btn {
@@ -109,12 +108,18 @@ body {
 	cursor: pointer;
 }
 
-.header .search-btn:hover {
-	box-shadow: 0 1px 5px lightsalmon;
+#search-icon {
+	font-size: 22px;
+	transform: translate(0, 5px);
 }
 
-.header .search_images:active {
-	box-shadow: 0 1px 6px lightsalmon;
+#moon-icon {
+	font-size: 23px;
+	transform: translate(0, 5px);
+}
+
+#search-submit-btn:hover, #search-dark-btn:hover {
+	box-shadow: 0 1px 5px lightsalmon;
 }
 
 .header #logo {
@@ -137,6 +142,11 @@ body {
 	align-content: center;
 }
 
+#search-clear-btn {
+	background: rgba(255, 255, 255, 0);
+	transform: translate(-185px, -1px);
+}
+
 /*#logo-h2 {
 }*/
 
@@ -151,7 +161,6 @@ body {
 	background: #323232;
 	height: 100vh;
 	width: 40px;
-	padding: 0 0 5% 0;
 	border: 0;
 	text-align: center;
 }
@@ -178,6 +187,11 @@ body {
 	justify-content: space-around;
 	padding: 5px;
 	margin-top: 30px;
+}
+
+.all_selects label {
+	font-size: 14px;
+	color: black;
 }
 
 select {
@@ -265,7 +279,7 @@ picture img {
 	height: 135px;
 	width: 135px;
 	border-radius: 50%;
-	background: #127c6e;
+	background: white;
 }
 
 #back_to_top img {

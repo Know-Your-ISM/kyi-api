@@ -8,6 +8,8 @@ let $searchForm = document.querySelector(".search-form");
 let $searchBar = document.querySelector("#search-bar");
 let $searchSubmit = document.querySelector("#search-submit-btn");
 let $searchClear = document.querySelector("#search-clear-btn");
+let $searchDark = document.querySelector("#search-dark-btn");
+let $moonIcon = document.querySelector("#moon-icon");
 let $alerts = document.querySelector("#alerts");
 let $logo = document.querySelector("#logo");
 

@@ -1,4 +1,4 @@
-let blank_image = "/views/profile_blank.png";
+let blank_image = "/views/kyi_logo_2.png";
 
 const loadResults = (results) => {
     clearResults();
@@ -21,7 +21,6 @@ const clearResults = () => {
 }
 
 const insertResult = (result, i) => {
-    console.log(result);
     let { State, City, Course, Department, Name, Sex, House } = result;
     let li = document.createElement('li');
     let card = document.createElement('div');
@@ -49,6 +48,7 @@ const insertResult = (result, i) => {
 
     img.src = `https://kyi.herokuapp.com/api/students/avatar/${result._id}`;
     img.onerror = () => {
+        img.onerror = "";
         img.src = blank_image;
     }
     img.alt = "No photo available.";
