@@ -3,7 +3,8 @@ const MTech = require("../models/MTech");
 
 exports.querySearch = async (req, res) => {
     const query = req.query;
-    var selections = "Name City State Course Department House Sex Clubs";
+    // var selections = "Name City State Course Department House Sex Clubs admno";
+    var selections = null;
     var options = {
         skip: parseInt(req.query.skip),
         limit: parseInt(req.query.limit)
@@ -56,6 +57,13 @@ exports.querySearch = async (req, res) => {
     if(query.department) {
         searchableObject.Department = {
             $regex: new RegExp (query.department.toString().toLowerCase()),
+            $options: 'i'
+        };
+    }
+
+    if (query.club) {
+        searchableObject.Clubs = {
+            $regex: new RegExp (query.club.toString().toLowerCase()),
             $options: 'i'
         };
     }
@@ -114,7 +122,8 @@ exports.findByQuery = async function (req, res) {
                 { House: { $regex: regex, $options: "i" } }
             ] 
     };
-    var selections = "Name City State Course Department House Sex";
+    // var selections = "Name City State Course Department House Sex Clubs admno";
+    var selections = null;
     var options = {
         skip: parseInt(req.query.skip),
         limit: parseInt(req.query.limit)

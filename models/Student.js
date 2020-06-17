@@ -49,8 +49,8 @@ var StudentSchema = new mongoose.Schema({
 		default: ""
 	},
 	Clubs: {
-		type: Array,
-		default: []
+		type: [String],
+		default: [""]
 	},
 	Phone: {
 		type: String,
@@ -72,6 +72,11 @@ var StudentSchema = new mongoose.Schema({
 	format: {
 		type: String,
 		trim: true
+	},
+	Special: {
+		type: String,
+		trim: true,
+		default: ""
 	}
 },
 {
@@ -99,11 +104,23 @@ StudentSchema.methods.toJSON = function () {
 	delete userObject["Email"];
 	delete userObject["Sl"];
 	delete userObject["Phone"];
-	delete userObject["Clubs"];
 	delete userObject["id"];
 	delete userObject["Photo"];
 	delete userObject["format"];
+	delete userObject["createAt"];
+	delete userObject["updatedAt"];
+	delete userObject["Internship"];
 	return userObject;
 }
+
+StudentSchema.virtual('admno').get(function(value, virtual, doc) {
+	// console.log(doc, this);
+    return this["Admission No"];
+});
+
+StudentSchema.virtual('avatarURL').get(function(value, virtual, doc) {
+	// console.log(doc, this);
+    return `https://kyi.herokuapp.com/api/students/avatar/${this["_id"]}`;
+});
 
 module.exports = StudentSchema;
