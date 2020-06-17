@@ -160,12 +160,12 @@ exports.getPhoto = async (req, res) => {
 
 exports.verify = async (req, res) {
     try {
-        let student = await BTech.findOne({ "Admission No": req.params.admno });
+        let student = await BTech.findOne({ "Admission No": { $regex: new RegExp("^" + req.params.admno + "$", "i") } });
         if (student) {
             return res.json({ status: "Verified", student });
         }
         else {
-            student = await MTech.findOne({ "Admission No": req.params.admno });
+            student = await MTech.findOne({ "Admission No": { $regex: new RegExp("^" + req.params.admno + "$", "i") } });
             if (student) {
                 return res.json({ status: "Verified", student });
             }
