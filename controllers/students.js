@@ -157,3 +157,25 @@ exports.getPhoto = async (req, res) => {
         return res.status(500).json({ "message": err });
     }
 }
+
+exports.verify = async (req, res) {
+    try {
+        let student = await BTech.findOne({ "Admission No": req.params.admno });
+        if (student) {
+            return res.json({ status: "Verified", student });
+        }
+        else {
+            student = await MTech.findOne({ "Admission No": req.params.admno });
+            if (student) {
+                return res.json({ status: "Verified", student });
+            }
+            else {
+                return res.json({ status: "Unverifed" });
+            }
+        }
+    }
+    catch (e) {
+        console.log(e);
+        return res.status(500).json({ error: e });
+    }
+}

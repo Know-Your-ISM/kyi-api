@@ -27,6 +27,8 @@ router.post("/", upload.single("Photo"), students.create);
 
 router.get("/avatar/:id", students.getPhoto);
 
+router.get("/verification/:admno", students.verify);
+
 module.exports = router;
 
 /*
