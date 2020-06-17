@@ -158,7 +158,7 @@ exports.getPhoto = async (req, res) => {
     }
 }
 
-exports.verify = async (req, res) {
+exports.verify = async (req, res) => {
     try {
         let student = await BTech.findOne({ "Admission No": { $regex: new RegExp("^" + req.params.admno + "$", "i") } });
         if (student) {
