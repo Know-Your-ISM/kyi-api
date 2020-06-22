@@ -17,7 +17,8 @@ exp.use('/views', express.static('views'));
 exp.use(function (req, res, next){
 	let index = allowed_origins.findIndex(origin => {
 		return req.headers.origin == origin ? true : false;
-	})
+	});
+	if (index === -1) index = 1;
 	res.header("Access-Control-Allow-Origin", allowed_origins[index]);
 	res.header("Access-Control-Allow-Methods", "GET, ");
 	res.header("Access-Control-Allow-Headers", "Authorization, Accept, Content-Type, Origin, X-Requested-With");
