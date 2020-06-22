@@ -14,7 +14,7 @@ require ("./db/mongoose");
 exp.use('/views', express.static('views'));
 
 exp.use(function (req, res, next){
-	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Origin", "https://kyi.herokuapp.com, https://kyism.ga");
 	res.header("Access-Control-Allow-Methods", "*");
 	res.header("Access-Control-Allow-Headers", "Authorization, Accept, Content-Type, Origin, X-Requested-With");
 	next();
