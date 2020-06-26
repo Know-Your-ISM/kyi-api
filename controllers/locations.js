@@ -2,11 +2,13 @@ const Location = require ("../models/Location");
 
 exports.fetchCollegeLoc = async (req, res) => {
     try {
+        let _queryTime = Date.now();
         let locs = await Location.find({ propertyType: "Institute Owned" }, null, {
-            skip: req.query.skip,
-            limit: req.query.limit
+            skip: parseInt(req.query.skip),
+            limit: parseInt(req.query.limit)
         });
-        res.json({ count: locs.length, locations: locs });
+        _queryTime = Date.now() - _queryTime;
+        res.json({ count: locs.length, locations: locs, _queryTime });
     } catch (e) {
         console.log("fetchCollegeLoc:", e);
         res.status(500).json({ "error": e });
@@ -15,11 +17,13 @@ exports.fetchCollegeLoc = async (req, res) => {
 
 exports.fetchRestaurantLoc = async (req, res) => {
     try {
+        let _queryTime = Date.now();
         let locs = await Location.find({ propertyType: "Restaurant" }, null, {
-            skip: req.query.skip,
-            limit: req.query.limit
+            skip: parseInt(req.query.skip),
+            limit: parseInt(req.query.limit)
         });
-        res.json({ count: locs.length, locations: locs });
+        _queryTime = Date.now() - _queryTime;
+        res.json({ count: locs.length, locations: locs, _queryTime });
     } catch (e) {
         console.log("fetchRestaurantLoc:", e);
         res.status(500).json({ "error": e });
@@ -91,7 +95,7 @@ exports.searchLoc = async (req, res) => {
         let _queryTime = Date.now();
         let locs = await Location.find(fields, selections, options);
         _queryTime = Date.now() - _queryTime;
-        res.json({ count: locs.length, locations: locs });
+        res.json({ count: locs.length, locations: locs, _queryTime });
     } catch (e) {
         console.log("searchLog:", e);
         res.json({ "error": e });
