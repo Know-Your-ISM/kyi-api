@@ -6,6 +6,7 @@ const home = require ("./routes/home");
 const notFound = require ("./routes/404");
 const app = require ("./routes/app");
 const dev = require ("./routes/dev");
+const locations = require ("./routes/locations");
 
 const exp = express();
 const allowed_origins = ['null', 'https://kyism.ga'];
@@ -36,6 +37,7 @@ exp.use("/api/search", search);
 exp.use("/api/students", students);
 exp.use("/api/app", app);
 exp.use("/api/dev", dev);
+exp.use("/api/locations", locations);
 
 exp.use(notFound);
 
