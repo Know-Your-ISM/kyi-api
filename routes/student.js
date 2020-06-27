@@ -29,6 +29,8 @@ router.get("/avatar/:id", students.getPhoto);
 
 router.get("/verification/:admno", students.verify);
 
+router.patch("/:id", students.updateOne);
+
 module.exports = router;
 
 /*

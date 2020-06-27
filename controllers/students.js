@@ -113,9 +113,9 @@ exports.create = async (req, res) => {
             student = new BTech(req.body);
             await Btech.findOneAndDelete({"Admission No": { $regex: regex }});
         }
-        else {
-            student = new MTech(req.body);
-            await MTech.findOneAndDelete({"Admission No": { $regex: regex }});
+        else { // This block should be for MTech.
+            student = new Btech(req.body);
+            await Btech.findOneAndDelete({"Admission No": { $regex: regex }});
         }
 
         if (req.file) {
@@ -126,7 +126,7 @@ exports.create = async (req, res) => {
 
         let saved = await student.save();
 
-        res.send(JSON.stringify({ student: saved }) + `\nStudent saved.`);
+        res.json({ "info" : "Student saved.", student: saved });
     }
     catch (e) {
         console.log(e);
@@ -177,5 +177,15 @@ exports.verify = async (req, res) => {
     catch (e) {
         console.log(e);
         return res.status(500).json({ error: e });
+    }
+}
+
+exports.updateOne = async (req, res) => {
+    try {
+        let student = await BTech.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true });
+        res.json(student)
+    } catch (e) {
+        res.status(500).json({ "error": e });
+        console.log("updateOne:", e);
     }
 }
