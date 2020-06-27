@@ -77,6 +77,11 @@ var StudentSchema = new mongoose.Schema({
 		type: String,
 		trim: true,
 		default: ""
+	},
+	PhotoURL: {
+		type: String,
+		trim: true,
+		default: ""
 	}
 },
 {
