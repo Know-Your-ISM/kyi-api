@@ -1,19 +1,19 @@
 const mongoose = require('mongoose');
 const bcrypt = require ('bcrypt');
 
-const urlRegex = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi
+const urlRegex = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/ig;
 
 const URLSchema = mongoose.Schema({
     origin: {
         type: String,
-        match: urlRegex,
         trim: true,
-        default: 'https://kyism.ga/shorts'
+        match: urlRegex,
+        default: 'https://kyism.ga/shorts/'
     },
     target: {
         type: String,
-        match: urlRegex,
         trim: true,
+        match: urlRegex,
         required: true
     },
     mirror: {
