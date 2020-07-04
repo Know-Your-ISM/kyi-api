@@ -7,7 +7,6 @@ const URLSchema = mongoose.Schema({
     origin: {
         type: String,
         trim: true,
-        match: urlRegex,
         default: 'https://kyism.ga/shorts/'
     },
     target: {
