@@ -38,7 +38,7 @@ URLSchema.pre('save', async function (next) {
         console.log('New url created.');
         url.mirror = await bcrypt.hash(url.target, 2);
         url.mirror = url.mirror.slice(url.mirror.length - 9);
-        url.shortURL = "kyism.ga/" + url.mirror;
+        url.shortURL = "kyism.gq/" + url.mirror;
     }
     next();
 });

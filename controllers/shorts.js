@@ -1,9 +1,11 @@
 const ShortURL = require ('../models/URL');
 
 exports.createShort = async function(req, res) {
+    console.log(req.body);
     let short = ShortURL({
         target: req.body.url
     });
+    console.log(short);
     try {
         let url = await short.save();
         res.json(url);
