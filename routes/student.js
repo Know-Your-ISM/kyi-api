@@ -31,6 +31,8 @@ router.get("/verification/:admno", students.verify);
 
 router.patch("/:id", students.updateOne);
 
+router.get("/quantities/number", students.number);
+
 module.exports = router;
 
 /*

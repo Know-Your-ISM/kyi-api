@@ -1,5 +1,6 @@
 const BTech = require("../models/BTech");
 const MTech = require("../models/MTech");
+const { createSeachableObject } = require("../middleware/utils/params");
 
 exports.querySearch = async (req, res) => {
     const query = req.query;
@@ -10,70 +11,7 @@ exports.querySearch = async (req, res) => {
         limit: parseInt(req.query.limit)
     };
 
-    var searchableObject = {};
-
-    if(query.name) {
-        searchableObject["Name"] = {
-            $regex: new RegExp (query.name.toString().toLowerCase()),
-            $options: 'i'
-        };
-	}
-	
-	if(query.admno) {
-        searchableObject["Admission No"] = {
-            $regex: new RegExp (query["admno"].toString().toLowerCase()),
-            $options: 'i'
-        };
-	}
-	
-	if(query.city) {
-        searchableObject["City"] = {
-            $regex: new RegExp (query.city.toString().toLowerCase()),
-            $options: 'i'
-        };
-    }
-
-    if(query.state) {
-        searchableObject["State"] = {
-            $regex: new RegExp (query.state.toString().toLowerCase()),
-            $options: 'i'
-        };
-    }
-
-    if (query.sex) {
-        searchableObject.Sex = {
-            $regex: new RegExp (query.sex.toString().toLowerCase()),
-            $options: 'i'
-        };
-	}
-	
-	if (query.house) {
-        searchableObject.House = {
-            $regex: new RegExp (query.house.toString().toLowerCase()),
-            $options: 'i'
-        };
-    }
-
-    if(query.department) {
-        searchableObject.Department = {
-            $regex: new RegExp (query.department.toString().toLowerCase()),
-            $options: 'i'
-        };
-    }
-
-    if (query.club) {
-        searchableObject.Clubs = {
-            $regex: new RegExp (query.club.toString().toLowerCase()),
-            $options: 'i'
-        };
-    }
-
-    if(query.intern) {
-        searchableObject.Internship = {
-            $regex: new RegExp (query.intern.toString().toLowerCase()),
-            $options: 'i'
-        };
-    }
+    var searchableObject = createSeachableObject(query);
 
     var students = [];
 

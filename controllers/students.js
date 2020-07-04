@@ -2,6 +2,7 @@ const BTech = require("../models/BTech");
 const MTech = require("../models/MTech");
 
 const sharp = require("sharp");
+const { createSeachableObject } = require("../middleware/utils/params");
 
 exports.getAll = async (req, res) => {
     var students = [];
@@ -187,5 +188,30 @@ exports.updateOne = async (req, res) => {
     } catch (e) {
         res.status(500).json({ "error": e });
         console.log("updateOne:", e);
+    }
+}
+
+exports.number = async (req, res) => {
+    try {
+        let query = req.query;
+        let searchableObject = createSeachableObject(query);
+        let number = 0;
+
+        let _queryTime = Date.now();
+        if ((query.course === "btech")) {
+            number = await BTech.countDocuments(searchableObject);
+        } else if (query.course === "mtech") {
+            number = await MTech.countDocuments(searchableObject);
+        } else {
+            number = await BTech.countDocuments(searchableObject);
+            number += await MTech.countDocuments(searchableObject);
+        }
+
+        _queryTime = Date.now() - _queryTime;
+
+        res.json({ count: number, _queryTime });
+    } catch(e) {
+        console.log(e);
+        res.status(500).json(e);
     }
 }
