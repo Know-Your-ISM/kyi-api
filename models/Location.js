@@ -36,22 +36,22 @@ const LocationSchema = mongoose.Schema({
     photo: {
         big: {
             type: String,
-            default: "",
+            default: "https://i.imgur.com/AxHyhawh.png",
             trim: true
         },
         medium: {
             type: String,
-            default: "",
+            default: "https://i.imgur.com/AxHyhawl.png",
             trim: true
         },
         small: {
             type: String,
-            default: "",
+            default: "https://i.imgur.com/AxHyhawm.png",
             trim: true
         },
         thumb: {
             type: String,
-            default: "",
+            default: "https://i.imgur.com/AxHyhawt.png",
             trim: true
         }
     },

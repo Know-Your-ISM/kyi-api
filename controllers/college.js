@@ -3,7 +3,7 @@ const Location = require ("../models/Location");
 exports.fetchAll = async (req, res) => {
     try {
         let _queryTime = Date.now();
-        let locs = await Location.find({ propertyType: "Institute Owned" }, null, {
+        let locs = await Location.find({}, null, {
             skip: parseInt(req.query.skip),
             limit: parseInt(req.query.limit)
         });
