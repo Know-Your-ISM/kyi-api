@@ -8,6 +8,7 @@ const app = require ("./routes/app");
 const dev = require ("./routes/dev");
 const locations = require ("./routes/locations");
 const shorts = require ("./routes/shorts");
+const reviews = require ("./routes/reviews");
 
 const exp = express();
 const allowed_origins = ['null', 'https://kyism.ga'];
@@ -40,6 +41,7 @@ exp.use("/api/app", app);
 exp.use("/api/dev", dev);
 exp.use("/api/locations", locations);
 exp.use("/api/shorts", shorts);
+exp.use("/api/reviews", reviews);
 
 exp.use(notFound);
 

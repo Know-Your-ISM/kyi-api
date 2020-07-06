@@ -2,30 +2,20 @@ const BTech = require("../models/BTech");
 const MTech = require("../models/MTech");
 
 const sharp = require("sharp");
-const { createSeachableObject } = require("../middleware/utils/params");
+const { createSeachableObject, skipAndLimit } = require("../middleware/utils/params");
 
 exports.getAll = async (req, res) => {
     var students = [];
+    let options = skipAndLimit(req.query.skip, req.query.limit);
+    let options2 = skipAndLimit(parseInt(req.query.skip)/2, parseInt(req.query.limit)/2);
     try {
         if (req.query.course === "btech") {
-            students = await BTech.find({}, "Name Place Branch House Sex", {
-                skip: parseInt(req.query.skip),
-                limit: parseInt(req.query.limit)
-            });
+            students = await BTech.find({}, "Name Place Branch House Sex", options)
         } else if (req.query.course === "mtech") {
-            students = await MTech.find({}, "Name Place Branch House Sex", {
-                skip: parseInt(req.query.skip),
-                limit: parseInt(req.query.limit)
-            });
+            students = await MTech.find({}, "Name Place Branch House Sex", options);
         } else {
-            const btech = await BTech.find({}, "Name Place Branch House Sex", {
-                skip: parseInt(req.query.skip),
-                limit: parseInt(req.query.limit)
-            });
-            const mtech = await MTech.find({}, "Name Place Branch House Sex", {
-                skip: parseInt(req.query.skip),
-                limit: parseInt(req.query.limit)
-            });
+            const btech = await BTech.find({}, "Name Place Branch House Sex", options2);
+            const mtech = await MTech.find({}, "Name Place Branch House Sex", options2);
             students = [ ...btech, ...mtech ];
         }
         return res.status(200).json({ "count": students.length, "students": students });

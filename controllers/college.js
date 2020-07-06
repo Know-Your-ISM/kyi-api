@@ -1,6 +1,6 @@
 const Location = require ("../models/Location");
 
-exports.fetchCollegeLoc = async (req, res) => {
+exports.fetchAll = async (req, res) => {
     try {
         let _queryTime = Date.now();
         let locs = await Location.find({ propertyType: "Institute Owned" }, null, {
@@ -15,21 +15,6 @@ exports.fetchCollegeLoc = async (req, res) => {
     }
 }
 
-exports.fetchRestaurantLoc = async (req, res) => {
-    try {
-        let _queryTime = Date.now();
-        let locs = await Location.find({ propertyType: "Restaurant" }, null, {
-            skip: parseInt(req.query.skip),
-            limit: parseInt(req.query.limit)
-        });
-        _queryTime = Date.now() - _queryTime;
-        res.json({ count: locs.length, locations: locs, _queryTime });
-    } catch (e) {
-        console.log("fetchRestaurantLoc:", e);
-        res.status(500).json({ "error": e });
-    }
-}
-
 exports.createLoc = async (req, res) => {
     let { 
         name, latitude, longitude, 
@@ -39,7 +24,7 @@ exports.createLoc = async (req, res) => {
     try {
         let loc = new Location ({
             name: name,
-            propertyType: propertyType || req.url.match(/restaurant/) ? "Restaurant" : "Institute Owned",
+            propertyType: propertyType || "Institute Owned",
             photo: {
                 big: big || "",
                 medium: medium || "",
@@ -47,10 +32,10 @@ exports.createLoc = async (req, res) => {
                 thumb: thumb || ""
             },
             costs: {
-                rickshaw: rickshaw || 0,
-                spending: spending || 0
+                rickshaw: rickshaw || "0",
+                spending: spending || "0"
             },
-            rating: rating || 0,
+            rating: rating || "0",
             coordinates: {
                 latitude: latitude || "",
                 longitude: longitude || "",
@@ -72,22 +57,19 @@ exports.searchLoc = async (req, res) => {
     let regex = new RegExp (req.params.query);
     var fields = { 
         $or: [ 
-                { name: { $regex: regex, $options: "i" } },
-                { "propertyType": { $regex: regex, $options: "i" } },
-                { "description": { $regex: regex, $options: "i" } },
-                { rating: { $regex: regex, $options: "i" } },
-                { "coordinates.longitude": { $regex: regex, $options: "i" } },
-                { "coordinates.latitude": { $regex: regex, $options: "i" } }, 
-                { "coordinates.plusID": { $regex: regex, $options: "i" } }, 
-                { "costs.rickshaw": { $regex: regex, $options: "i" } },
-                { "costs.spending": { $regex: regex, $options: "i" } }
-            ] 
+            { name: { $regex: regex, $options: "i" } },
+            { "propertyType": { $regex: regex, $options: "i" } },
+            { "description": { $regex: regex, $options: "i" } },
+            { "coordinates.longitude": { $regex: regex, $options: "i" } },
+            { "coordinates.latitude": { $regex: regex, $options: "i" } }, 
+            { "coordinates.plusID": { $regex: regex, $options: "i" } }, 
+            { "costs.rickshaw": { $regex: regex, $options: "i" } },
+            { "costs.spending": { $regex: regex, $options: "i" } },
+            { rating: { $regex: regex, $options: "i" } }
+        ] 
     };
 
-    var options = {
-        skip: parseInt(req.query.skip),
-        limit: parseInt(req.query.limit)
-    };
+    var options = skipAndLimit(req.query.skip, req.query.limit);
 
     var selections = null;
 
@@ -97,7 +79,7 @@ exports.searchLoc = async (req, res) => {
         _queryTime = Date.now() - _queryTime;
         res.json({ count: locs.length, locations: locs, _queryTime });
     } catch (e) {
-        console.log("searchLog:", e);
+        console.log("searchLoc:", e);
         res.json({ "error": e });
     }
 }
@@ -110,6 +92,18 @@ exports.fetchById = async (req, res) => {
         }
     } catch (e) {
         console.log("fetchById:", e);
+        res.json({ "error": e });
+    }
+}
+
+exports.updateById = async function (req, res) {
+    try {
+        let location = await Location.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (location) {
+            res.json(location);
+        }
+    } catch (e) {
+        console.log("updateById:", e);
         res.json({ "error": e });
     }
 }

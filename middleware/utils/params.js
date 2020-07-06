@@ -58,3 +58,10 @@ exports.createSeachableObject = (query) => {
 
     return searchableObject;
 }
+
+exports.skipAndLimit = function (skip, limit) {
+    return {
+        skip: parseInt(skip),
+        limit: parseInt(limit)
+    };
+}

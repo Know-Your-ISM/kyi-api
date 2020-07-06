@@ -1,15 +1,13 @@
 const BTech = require("../models/BTech");
 const MTech = require("../models/MTech");
-const { createSeachableObject } = require("../middleware/utils/params");
+const { createSeachableObject, skipAndLimit } = require("../middleware/utils/params");
 
 exports.querySearch = async (req, res) => {
     const query = req.query;
     // var selections = "Name City State Course Department House Sex Clubs admno";
     var selections = null;
-    var options = {
-        skip: parseInt(req.query.skip),
-        limit: parseInt(req.query.limit)
-    };
+    var options = skipAndLimit(req.query.skip, req.query.limit);
+    let options2 = skipAndLimit(parseInt(req.query.skip)/2, parseInt(req.query.limit)/2);
 
     var searchableObject = createSeachableObject(query);
 
@@ -22,15 +20,8 @@ exports.querySearch = async (req, res) => {
         } else if (query.course === "mtech") {
             students = await MTech.find(searchableObject, selections, options);
         } else {
-            const btech = await BTech.find(searchableObject, selections, {
-                skip: Math.floor(parseInt(req.query.skip)/2),
-                limit: Math.floor(parseInt(req.query.limit)/2)
-            });
-
-            const mtech = await MTech.find(searchableObject, selections, {
-                skip: Math.floor(parseInt(req.query.skip)/2),
-                limit: Math.floor(parseInt(req.query.limit)/2)
-            });
+            const btech = await BTech.find(searchableObject, selections, options2);
+            const mtech = await MTech.find(searchableObject, selections, options2);
 
             students = [ ...btech, ...mtech ];
         }
@@ -62,10 +53,7 @@ exports.findByQuery = async function (req, res) {
     };
     // var selections = "Name City State Course Department House Sex Clubs admno";
     var selections = null;
-    var options = {
-        skip: parseInt(req.query.skip),
-        limit: parseInt(req.query.limit)
-    };
+    var options = skipAndLimit(req.query.skip, req.query.limit);
 
     try {
         let _queryTime = Date.now();

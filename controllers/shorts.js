@@ -1,7 +1,15 @@
 const ShortURL = require ('../models/URL');
 
 exports.createShort = async function(req, res) {
-    console.log(req.body);
+    try {
+        let alreadyExists = await ShortURL.findOne({ target: req.body.url });
+        if (alreadyExists) {
+            return res.json(alreadyExists);
+        }
+    } catch (e) {
+        console.log(e);
+    }
+
     let short = ShortURL({
         target: req.body.url
     });
@@ -12,7 +20,12 @@ exports.createShort = async function(req, res) {
         
     } catch (e) {
         console.log("createShort:", e);
-        res.status(400).json(e);
+        try {
+            let url = await short.save();
+        } catch (err) {
+            res.status(400).json(err);
+        }
+
     }
 }
 
