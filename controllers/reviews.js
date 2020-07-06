@@ -91,7 +91,7 @@ exports.getByFilters = async function (req, res) {
     if (req.query.restaurant && req.query.restaurant.length >= 11) {
         r_id = req.query.restaurant;
     }
-    if (req.query.restaurant && req.query.student.length >= 11) {
+    if (req.query.student && req.query.student.length >= 11) {
         s_id = req.query.student;
     }
 
